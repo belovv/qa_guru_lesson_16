@@ -7,6 +7,7 @@ import model.color.ResponseArray;
 import model.user.Response;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.http.ContentType.JSON;
 import static restTest.CustomSpec.spec;
 import static io.restassured.RestAssured.*;
 
@@ -21,7 +22,7 @@ public class RestTest {
                 .then()
                 .assertThat()
                 .statusCode(200)
-                .contentType(ContentType.JSON);
+                .contentType(JSON);
     }
 
     @Test
@@ -44,7 +45,7 @@ public class RestTest {
 
         given()
                 .filter(new AllureRestAssured())
-                .contentType(ContentType.JSON)
+                .contentType(JSON)
                 .log().uri()
                 .body(data)
                 .when()
@@ -110,7 +111,7 @@ public class RestTest {
                 .get("/api/unknown")
                 .then()
                 .spec(spec().expectedResponseUser())
-                .contentType(ContentType.JSON)
+                .contentType(JSON)
                 .extract().as(ResponseArray.class);
         System.out.println(responseArray.getData().get(2).getPantoneValue());
     }
